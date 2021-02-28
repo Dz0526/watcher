@@ -21,6 +21,7 @@ class Watcher(FileSystemEventHandler):
     def __init__(self, command, created_file_bool):
         self.command = command
         self.created_file_bool = created_file_bool
+        self.created_file = "created_file"
 
     def run_command(self):
         time.sleep(0.1)
@@ -36,8 +37,9 @@ class Watcher(FileSystemEventHandler):
             if self.created_file_bool:
                 for num,snipet in enumerate(self.command):
                     print(snipet)
-                    if snipet == "created_file":
+                    if snipet == self.created_file:
                         self.command[num] = filepath
+                        self.created_file = filepath
 
             self.run_command()
     """
